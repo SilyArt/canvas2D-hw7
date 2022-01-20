@@ -1,31 +1,20 @@
-function getData () {
-	const movie = document.getElementById("movie").value;
-	const container = document.getElementById("container");
-	const url = `https://www.omdbapi.com/?apikey=8cf29ff5&t=${movie}`;
-	const xhttps = new XMLHttpRequest();
-	
-	xhttps.onreadystatechange = function () {
-		if (this.readyState === 4 && this.status === 200) {
-			console.log(this.responseText);
-			console.log(JSON.parse(this.responseText));
-			const data = JSON.parse(this.responseText);
-			
-			document.getElementById("movie-title").innerHTML = data.Title;
-			document.getElementById("poster").src = data.Poster;
-			document.getElementById("year").innerHTML = data.Year;
-			document.getElementById("released").innerHTML = data.Released;
-			document.getElementById("runtime").innerHTML = data.Runtime;
-			document.getElementById("director").innerHTML = data.Director;
-			document.getElementById("writer").innerHTML = data.Writer;
-			document.getElementById("genre").innerHTML = data.Genre;
-			document.getElementById("plot").innerHTML = data.Plot;
-		}
-	};
-	xhttps.open("GET", url, true);
-	xhttps.send();
+function draw(){
+    const canvas = document.getElementById("canvas");
+    let ctx = canvas.getContext("2d");
+    canvas.style.backgroundColor = "lightpink";
+    
+    if (canvas.getContext){
+        ctx = canvas.getContext("2d");
+    } else {
+        const para = document.querySelector(".unsupported");
+        para.textContent = 'Your browser does not support HTML5 Canvas';
+    }
+
+    centerX = canvas.width / 2;
+    centerY = canvas.height / 2;
+    ctx.fillStyle = 'lightyellow';
+    ctx.fillRect(centerX-150, centerY-100, 300, 200);
+    ctx.clearRect(centerX-140, centerY-90, 280, 180);
+    ctx.strokeRect(centerX-158, centerY-108, 315, 215);
 }
-const button = document.getElementById("btn");
-button.addEventListener("click", () => {
-	getData();
-	document.getElementById("container").style.backgroundColor = "Lavender";
-});
+draw();
